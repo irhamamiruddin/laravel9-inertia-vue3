@@ -92,7 +92,7 @@
 
             const updateProfileInformation = () => {
 
-                form.post(route('users.update',props.user.id), {
+                form.value.post(route('users.update',props.user.id), {
                     preserveScroll: true,
                 });
             };
