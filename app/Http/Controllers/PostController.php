@@ -2,18 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Post;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class PostController extends Controller
 {
-
     public function __construct()
     {
-        $this->authorizeResource(User::class);
+        $this->authorizeResource(Post::class);
     }
-
     /**
      * Display a listing of the resource.
      *
@@ -21,8 +19,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = User::all();
-        return Inertia::render('User/Index',['users'=>$user]);
+        $post = Post::all();
+        return Inertia::render('Post/Index',['posts'=>$post]);
     }
 
     /**
@@ -32,7 +30,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return Inertia::render('User/Create');
+        return Inertia::render('Post/Create');
     }
 
     /**
@@ -43,58 +41,67 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required|string',
+            'content' => 'required|string'
+        ]);
+
+        $request->user()->posts()->create($request->only('title', 'content'));
+
+        return redirect()->route('posts.index')->with('success', 'Post Added!');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(Post $post)
     {
-        return Inertia::render('User/Show',['users'=>$user]);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(Post $post)
     {
-        return Inertia::render('User/Edit',compact('user'));
+        return Inertia::render('Post/Edit',compact('post'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, Post $post)
     {
         $request->validate([
-            'name' => 'required',
-            'email' => 'required|email'
+            'title' => 'required|string',
+            'content' => 'required|string'
         ]);
 
-        $user->update($request->only('name','email'));
+        $post->update($request->only('title', 'content'));
 
-        return back();
+        return back()->with('success', 'Post Updated!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(Post $post)
     {
-        //
+        $post->delete();
+
+        return back()->with('success', 'Post Deleted!');
     }
 }

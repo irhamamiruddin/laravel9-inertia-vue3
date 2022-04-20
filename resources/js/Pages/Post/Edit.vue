@@ -2,46 +2,46 @@
     <AppLayout title="Dashboard">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Edit
+                Edit Post
             </h2>
         </template>
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <JetFormSection @submitted="updateProfileInformation">
+                <JetFormSection @submitted="updatePostInformation">
                     <template #title>
-                        Profile Information
+                        Post Update
                     </template>
 
                     <template #description>
-                        Update your account's profile information and email address.
+                        Update your post's contents.
                     </template>
 
                     <template #form>
 
-                        <!-- Name -->
+                        <!-- Title -->
                         <div class="col-span-6 sm:col-span-4">
-                            <JetLabel for="name" value="Name" />
+                            <JetLabel for="title" value="Title" />
                             <JetInput
-                                id="name"
-                                v-model="form.name"
+                                id="title"
+                                v-model="form.title"
                                 type="text"
                                 class="mt-1 block w-full"
-                                autocomplete="name"
+                                autocomplete="title"
                             />
-                            <JetInputError :message="form.errors.name" class="mt-2" />
+                            <JetInputError :message="form.errors.title" class="mt-2" />
                         </div>
 
-                        <!-- Email -->
+                        <!-- Content -->
                         <div class="col-span-6 sm:col-span-4">
-                            <JetLabel for="email" value="Email" />
-                            <JetInput
-                                id="email"
-                                v-model="form.email"
-                                type="email"
-                                class="mt-1 block w-full"
-                            />
-                            <JetInputError :message="form.errors.email" class="mt-2" />
+                            <JetLabel for="content" value="Content" />
+                            <textarea
+                                class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
+                                id="content"
+                                v-model="form.content"
+                                row="10">
+                            </textarea>
+                            <JetInputError :message="form.errors.content" class="mt-2" />
                         </div>
                     </template>
 
@@ -81,23 +81,25 @@
             JetLabel,
         },
 
-        props:['user'],
+        props:{
+            post:Object,
+        },
 
         setup(props){
             const form = useForm({
                 _method: 'PUT',
-                name: props.user.name,
-                email: props.user.email,
+                title: props.post.title,
+                content: props.post.content,
             });
 
-            const updateProfileInformation = () => {
+            const updatePostInformation = () => {
 
-                form.value.post(route('users.update',props.user.id), {
+                form.post(route('posts.update',props.post.id), {
                     preserveScroll: true,
                 });
             };
 
-            return { form, updateProfileInformation };
+            return { form, updatePostInformation };
         }
     }
 </script>

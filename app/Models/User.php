@@ -72,8 +72,23 @@ class User extends Authenticatable
         return now()->parse($value)->timezone(config('app.timezone'))->diffForHumans();
     }
 
-    public function checkRole($role)
+    public function hasRole($role)
     {
         return $this->role === $role;
+    }
+
+    public function scopeFilter($query, array $filters)
+    {
+        $query->when($filters['search'] ?? null, function ($query, $search) {
+            $query->where(function ($query) use ($search) {
+                $query->where('name', 'like', '%' . $search . '%')
+                    ->orWhere('email', 'like', '%' . $search . '%');
+            });
+        });
+    }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class, 'user_id');
     }
 }

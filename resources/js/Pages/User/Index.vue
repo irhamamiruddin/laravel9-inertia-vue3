@@ -59,14 +59,20 @@
                                         <td>
                                             <inertia-link :href="route('users.show',user.id)" title="View" v-if="user.can.view">
 												<button class="inline-block px-2.5 py-2 m-1 bg-blue-400 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-500 hover:shadow-lg focus:bg-blue-500 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-600 active:shadow-lg transition duration-150 ease-in-out">
-													<i class="fa fa-eye" aria-hidden="true"></i> View
+                                                    View
 												</button>
 											</inertia-link>
 											<inertia-link :href="route('users.edit',user.id)" title="Edit" v-if="user.can.update">
-												<button class="inline-block px-2.5 py-2 m-1 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">
-													<i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit
+												<button class="inline-block px-2.5 py-2 m-1 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-900 hover:shadow-lg focus:bg-blue-900 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">
+                                                    Edit
 												</button>
 											</inertia-link>
+                                            <button
+                                                @click="deletePost(post.id)"
+                                                class="inline-block px-2.5 py-2 m-1 bg-red-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-red-900 hover:shadow-lg focus:bg-red-900 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out"
+                                            >
+                                                Delete
+                                            </button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -89,6 +95,9 @@
             AppLayout,
             JetButton,
         },
-        props:['users']
+
+        props:{
+            users: Object,
+        },
     }
 </script>

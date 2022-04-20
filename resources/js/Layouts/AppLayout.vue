@@ -55,6 +55,9 @@ const logout = () => {
                                 <JetNavLink :href="route('users.index')" :active="route().current('users.*')" v-if='$page.props.permission.users.viewAny'>
                                     Users
                                 </JetNavLink>
+                                <JetNavLink :href="route('posts.index')" :active="route().current('posts.*')" v-if='$page.props.permission.users.viewAny'>
+                                    Posts
+                                </JetNavLink>
                             </div>
                         </div>
 
@@ -216,6 +219,9 @@ const logout = () => {
                         </JetResponsiveNavLink>
                         <JetResponsiveNavLink :href="route('users.index')" :active="route().current('users.*')" v-if='$page.props.permission.users.viewAny'>
                             Users
+                        </JetResponsiveNavLink>
+                        <JetResponsiveNavLink :href="route('posts.index')" :active="route().current('posts.*')" v-if='$page.props.permission.users.viewAny'>
+                            Posts
                         </JetResponsiveNavLink>
                     </div>
 

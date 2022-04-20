@@ -4,6 +4,9 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\PostShowController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,18 +28,17 @@ Route::get('/', function () {
     ]);
 });
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-])->group(function () {
+//put the route for show post outside the middeware so its public
+Route::get('posts/{post}', PostShowController::class)->name('posts.show');
+
+Route::prefix('/admin')->middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])->group(function () {
+
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
+
+    Route::resource('/users',UserController::class);
+    Route::resource('/posts',PostController::class)->except('show'); //let user view post without logged in
+
 });
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-])->resource('/users',UserController::class);

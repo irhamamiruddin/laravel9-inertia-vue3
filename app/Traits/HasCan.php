@@ -7,10 +7,14 @@ trait HasCan
     public function getCanAttribute()
     {
         $currentUser = request()->user();
-        return[
-            'view' => $currentUser->can('view',$this),
-            'update' => $currentUser->can('update',$this),
-            'delete' => $currentUser->can('delete',$this),
-        ];
+
+        if($currentUser)
+        {
+            return[
+                'view' => $currentUser->can('view',$this),
+                'update' => $currentUser->can('update',$this),
+                'delete' => $currentUser->can('delete',$this),
+            ];
+        }
     }
 }
