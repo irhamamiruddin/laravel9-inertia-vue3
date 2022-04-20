@@ -28,10 +28,8 @@ Route::get('/', function () {
     ]);
 });
 
-//put the route for show post outside the middeware so its public
-Route::get('posts/{post}', PostShowController::class)->name('posts.show');
 
-Route::prefix('/admin')->middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])->group(function () {
+Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])->group(function () {
 
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
@@ -42,3 +40,5 @@ Route::prefix('/admin')->middleware(['auth:sanctum',config('jetstream.auth_sessi
 
 });
 
+//put the route for show post outside the middeware so its public
+Route::get('posts/{post}', PostShowController::class)->name('posts.show');

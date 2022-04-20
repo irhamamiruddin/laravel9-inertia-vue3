@@ -12,6 +12,12 @@
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <JetInput
+                    type="text"
+                    class="block ml-2 mb-4 w-60"
+                    v-model="form.search"
+                    placeholder="Search user..."
+                />
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-3">
                     <div class="flex flex-col">
                         <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -43,7 +49,13 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="user in users" :key="user">
+                                    <!-- add .data if use paginate -->
+                                    <tr v-if="!users.data.length">
+                                        <td class="p-4 text-center text-gray-900" colspan="5">
+                                            No data
+                                        </td>
+                                    </tr>
+                                    <tr v-for="user in users.data" :key="user">
                                         <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                             {{ user.id }}
                                         </td>
@@ -68,7 +80,7 @@
 												</button>
 											</inertia-link>
                                             <button
-                                                @click="deletePost(post.id)"
+                                                @click="deleteUser(user.id)"
                                                 class="inline-block px-2.5 py-2 m-1 bg-red-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-red-900 hover:shadow-lg focus:bg-red-900 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out"
                                             >
                                                 Delete
@@ -77,6 +89,7 @@
                                     </tr>
                                 </tbody>
                                 </table>
+                                <JetPagination class="m-5" :links="users.links" />
                             </div>
                             </div>
                         </div>
@@ -87,17 +100,55 @@
     </AppLayout>
 </template>
 <script>
+    import { reactive, watchEffect } from "vue";
+    import { pickBy } from "lodash";
+    import {Inertia} from '@inertiajs/inertia';
     import AppLayout from '@/Layouts/AppLayout.vue';
     import JetButton from '@/Jetstream/Button.vue';
+    import JetInput from '@/Jetstream/Input.vue';
+    import JetPagination from '@/Components/Pagination.vue'
 
     export default{
-        components: {
+        components:
+        {
             AppLayout,
             JetButton,
+            JetPagination,
+            JetInput,
         },
 
-        props:{
+        props:
+        {
             users: Object,
+            filters: Object,
         },
-    }
+
+        setup(props)
+        {
+            // Make a reactive form. Table change when something is search.
+            const form = reactive({
+                search: props.filters.search,
+                page: props.filters.page,
+            });
+
+            watchEffect(() => {
+                const query = pickBy(form);
+                Inertia.replace(
+                    route("users.index", Object.keys(query).length ? query : {})
+                );
+            });
+
+            // To delete User
+            const deleteUser = (userId) => {
+                const result = confirm("Confirm delete user?");
+                if (result) {
+                    Inertia.delete(route("users.destroy", userId), {
+                        preserveScroll: true,
+                    });
+                }
+            };
+
+            return { form, deleteUser };
+        }
+    };
 </script>

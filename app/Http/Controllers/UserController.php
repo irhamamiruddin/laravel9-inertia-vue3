@@ -19,10 +19,16 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $user = User::all();
-        return Inertia::render('User/Index',['users'=>$user]);
+        // $user = User::paginate(5);
+        // return Inertia::render('User/Index',['users'=>$user]);
+
+        $queries = ['search', 'page'];
+        return Inertia::render('User/Index', [
+            'users' => User::filter($request->only($queries))->paginate()->withQueryString(),
+            'filters' => $request->all($queries),
+        ]);
     }
 
     /**
@@ -95,6 +101,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return back()->with('success', 'User Deleted!');
     }
 }

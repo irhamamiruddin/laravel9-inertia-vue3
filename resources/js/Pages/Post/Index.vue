@@ -12,7 +12,12 @@
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-
+                <JetInput
+                    type="text"
+                    class="block ml-2 mb-4 w-60"
+                    v-model="form.search"
+                    placeholder="Search post..."
+                />
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-3">
                     <div class="flex flex-col">
                         <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -39,12 +44,13 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <!-- <tr v-if="!posts.data.length">
+                                            <!-- add .data if use paginate -->
+                                            <tr v-if="!posts.data.length">
                                                 <td class="p-4 text-center text-gray-900" colspan="5">
                                                     No data
                                                 </td>
-                                            </tr> -->
-                                            <tr v-for="post in posts" :key="post">
+                                            </tr>
+                                            <tr v-for="post in posts.data" :key="post">
                                                 <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                                     {{ post.id }}
                                                 </td>
@@ -79,7 +85,7 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <!-- <jet-pagination class="m-5" :links="posts.links" /> -->
+                                    <JetPagination class="m-5" :links="posts.links" />
                                 </div>
                             </div>
                         </div>
@@ -96,49 +102,50 @@
     import AppLayout from '@/Layouts/AppLayout.vue';
     import JetButton from '@/Jetstream/Button.vue';
     import JetInput from '@/Jetstream/Input.vue';
-    // import JetPagination from '@/Components/JetPagination.vue'
+    import JetPagination from '@/Components/Pagination.vue'
 
     export default{
-        components: {
+        components:
+        {
             AppLayout,
             JetButton,
             JetInput,
-            // JetPagination,
+            JetPagination,
         },
 
-        props: {
+        props:
+        {
             posts: Object,
             filters: Object,
         },
 
-        setup(props) {
-
+        setup(props)
+        {
+            // Make a reactive form. Table change when something is search.
             const form = reactive({
-                // search: props.filters.search,
-                // page: props.filters.page,
+                search: props.filters.search,
+                page: props.filters.page,
             });
 
             watchEffect(() => {
                 const query = pickBy(form);
-
                 Inertia.replace(
                     route("posts.index", Object.keys(query).length ? query : {})
                 );
             });
 
+            // To delete Post
             const deletePost = (postId) => {
-
-                const result = confirm("Sure to delete?");
-
+                const result = confirm("Confirm delete post?");
                 if (result) {
                     Inertia.delete(route("posts.destroy", postId), {
-                    preserveScroll: true,
+                        preserveScroll: true,
                     });
                 }
             };
 
             return { form, deletePost };
-        }
-    }
+        },
+    };
 
 </script>

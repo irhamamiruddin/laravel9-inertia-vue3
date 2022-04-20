@@ -17,10 +17,21 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $post = Post::all();
-        return Inertia::render('Post/Index',['posts'=>$post]);
+        // $posts = Post::paginate(5);
+        // return Inertia::render('Post/Index',compact('posts'));
+
+        $queries = ['search', 'page'];
+        return Inertia::render('Post/Index', [
+            'posts' => Post::when($request->user()->hasRole('user'), function ($query) use ($request) {
+                $query->where('user_id', $request->user()->id); //Only show own post in Post/Index
+            })
+                ->filter($request->only($queries))
+                ->paginate(2)
+                ->withQueryString(),
+            'filters' => $request->all($queries),
+        ]);
     }
 
     /**
@@ -101,7 +112,6 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         $post->delete();
-
         return back()->with('success', 'Post Deleted!');
     }
 }
