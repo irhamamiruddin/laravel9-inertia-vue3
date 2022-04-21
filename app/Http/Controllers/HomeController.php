@@ -16,7 +16,7 @@ class HomeController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $posts = Post::with('user')->paginate()->withQueryString();
-        return Inertia::route('Home',compact('posts'));
+        $posts = Post::with('user')->paginate(2)->withQueryString();
+        return Inertia::render('Home',compact('posts'));
     }
 }

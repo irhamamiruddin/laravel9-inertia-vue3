@@ -53,6 +53,23 @@ const logout = () => {
                                     Home
                                 </JetNavLink>
                             </div>
+
+
+                            <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
+                                <JetNavLink v-if="$page.props.user" :href="route('dashboard')" class="text-sm text-gray-700 underline">
+                                    Dashboard
+                                </JetNavLink>
+
+                                <template v-else>
+                                    <JetNavLink :href="route('login')" class="text-sm text-gray-700 underline">
+                                        Log in
+                                    </JetNavLink>
+
+                                    <JetNavLink :href="route('register')" class="ml-4 text-sm text-gray-700 underline">
+                                        Register
+                                    </JetNavLink>
+                                </template>
+                            </div>
                         </div>
 
                         <div class="hidden sm:flex sm:items-center sm:ml-6">
