@@ -70,7 +70,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        // we use PostShowController to show the list of posts
     }
 
     /**
