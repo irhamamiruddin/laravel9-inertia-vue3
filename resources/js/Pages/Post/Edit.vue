@@ -8,7 +8,7 @@
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <JetFormSection @submitted="updatePostInformation">
+                <JetFormSection @submitted="updatePostInformation(post)">
                     <template #title>
                         Post Update
                     </template>
@@ -24,12 +24,12 @@
                             <JetLabel for="title" value="Title" />
                             <JetInput
                                 id="title"
-                                v-model="form.title"
+                                v-model="post.title"
                                 type="text"
                                 class="mt-1 block w-full"
                                 autocomplete="title"
                             />
-                            <JetInputError :message="form.errors.title" class="mt-2" />
+                            <JetInputError :message="$page.props.errors.title" class="mt-2" />
                         </div>
 
                         <!-- Content -->
@@ -38,10 +38,10 @@
                             <textarea
                                 class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
                                 id="content"
-                                v-model="form.content"
+                                v-model="post.content"
                                 row="10">
                             </textarea>
-                            <JetInputError :message="form.errors.content" class="mt-2" />
+                            <JetInputError :message="$page.props.errors.content" class="mt-2" />
                         </div>
                     </template>
 
@@ -61,7 +61,8 @@
 </template>
 
 <script>
-    import { useForm } from '@inertiajs/inertia-vue3';
+    // import { useForm } from '@inertiajs/inertia-vue3';
+    import { Inertia } from '@inertiajs/inertia';
     import AppLayout from '@/Layouts/AppLayout.vue';
     import JetButton from '@/Jetstream/Button.vue';
     import JetFormSection from '@/Jetstream/FormSection.vue';
@@ -81,25 +82,44 @@
             JetLabel,
         },
 
-        props:{
-            post:Object,
+        props:
+        {
+            post: Object,
         },
 
-        setup(props){
-            const form = useForm({
-                _method: 'PUT',
-                title: props.post.title,
-                content: props.post.content,
-            });
+        data(props){
+            return{
+                form:{
+                    title: props.post.title,
+                    content: props.post.content,
+                }
+            }
+        },
 
-            const updatePostInformation = () => {
+        methods:
+        {
+            updatePostInformation: function (data) {
+                data._method = 'PUT';
+                Inertia.post('/posts/' + data.id, data);
+                // Inertia.post(route('posts.update',data));
+            }
+        },
 
-                form.post(route('posts.update',props.post.id), {
-                    preserveScroll: true,
-                });
-            };
+        // setup(props){
+        //     const form = useForm({
+        //         _method: 'PUT',
+        //         title: props.post.title,
+        //         content: props.post.content,
+        //     });
 
-            return { form, updatePostInformation };
-        }
+        //     const updatePostInformation = () => {
+
+        //         form.post(route('posts.update',props.post.id), {
+        //             preserveScroll: true,
+        //         });
+        //     };
+
+        //     return { form, updatePostInformation };
+        // }
     }
 </script>

@@ -21,9 +21,6 @@
 </template>
 
 <script>
-    import { reactive, watchEffect } from "vue";
-    import { pickBy } from "lodash";
-    import { Inertia } from "@inertiajs/inertia";
     import GuestLayout from '@/Layouts/GuestLayout.vue';
     import JetPagination from '@/Components/Pagination.vue'
 

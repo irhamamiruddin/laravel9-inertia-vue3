@@ -91,13 +91,14 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request)
     {
         $request->validate([
             'title' => 'required|string',
             'content' => 'required|string'
         ]);
 
+        $post = Post::find($request->id);
         $post->update($request->only('title', 'content'));
 
         return back()->with('success', 'Post Updated!');

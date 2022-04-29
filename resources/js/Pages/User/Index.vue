@@ -123,6 +123,18 @@
             filters: Object,
         },
 
+        methods:
+        {
+            // To delete Post
+            deleteUser(postId)
+            {
+                const result = confirm("Confirm delete post?");
+                if (result) {
+                    Inertia.delete(route("posts.destroy", postId));
+                }
+            },
+        },
+
         setup(props)
         {
             // Make a reactive form. Table change when something is search.
@@ -139,16 +151,16 @@
             });
 
             // To delete User
-            const deleteUser = (userId) => {
-                const result = confirm("Confirm delete user?");
-                if (result) {
-                    Inertia.delete(route("users.destroy", userId), {
-                        preserveScroll: true,
-                    });
-                }
-            };
+            // const deleteUser = (userId) => {
+            //     const result = confirm("Confirm delete user?");
+            //     if (result) {
+            //         Inertia.delete(route("users.destroy", userId), {
+            //             preserveScroll: true,
+            //         });
+            //     }
+            // };
 
-            return { form, deleteUser };
+            return { form };
         }
     };
 </script>

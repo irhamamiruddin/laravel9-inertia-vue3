@@ -8,7 +8,7 @@
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <JetFormSection @submitted="createPost">
+                <JetFormSection @submitted="createPost(form)">
                     <template #title>
                         Post
                     </template>
@@ -29,14 +29,16 @@
                                 class="mt-1 block w-full"
                                 autocomplete="title"
                             />
-                            <JetInputError :message="form.errors.title" class="mt-2" />
+                            <JetInputError :message="$page.props.errors.title" class="mt-2" />
                         </div>
 
                         <!-- Content -->
                         <div class="col-span-6 sm:col-span-4">
                             <JetLabel for="content" value="Content" />
-                            <textarea class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" id="content" v-model="form.content" row="10"></textarea>
-                            <JetInputError :message="form.errors.content" class="mt-2" />
+                            <textarea class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
+                            id="content"
+                            v-model="form.content" row="10"></textarea>
+                            <JetInputError :message="$page.props.errors.content" class="mt-2" />
                         </div>
                     </template>
 
@@ -56,7 +58,8 @@
 </template>
 
 <script>
-    import { useForm } from '@inertiajs/inertia-vue3';
+    // import { useForm } from '@inertiajs/inertia-vue3';
+    import { Inertia } from '@inertiajs/inertia';
     import AppLayout from '@/Layouts/AppLayout.vue';
     import JetButton from '@/Jetstream/Button.vue';
     import JetFormSection from '@/Jetstream/FormSection.vue';
@@ -76,21 +79,37 @@
             JetLabel,
         },
 
-        props:['post'],
+        // props:[],
 
-        setup(props){
-            const form = useForm({
-                _method: 'POST',
-                title: "",
-                content: "",
-            });
+        data()
+        {
+            return {
+                form:{
+                    title: "",
+                    content: "",
+                }
+            }
+        },
 
-            const createPost = () => {
-                form.post(route('posts.store'));
-            };
+        methods:
+        {
+            createPost(data){
+                Inertia.post(route('posts.store',data));
+            }
+        },
 
-            return { form, createPost };
-        }
+        // setup(props){
+        //     const form = useForm({
+        //         _method: 'POST',
+        //         title: "",
+        //         content: "",
+        //     });
+
+        //     const createPost = () => {
+        //         form.post(route('posts.store'));
+        //     };
+
+        //     return { form, createPost };
+        // }
     }
 </script>
-

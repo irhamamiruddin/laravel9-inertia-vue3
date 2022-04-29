@@ -103,7 +103,6 @@
     import JetButton from '@/Jetstream/Button.vue';
     import JetInput from '@/Jetstream/Input.vue';
     import JetPagination from '@/Components/Pagination.vue'
-
     export default{
         components:
         {
@@ -117,6 +116,18 @@
         {
             posts: Object,
             filters: Object,
+        },
+
+        methods:
+        {
+            // To delete Post
+            deletePost(postId)
+            {
+                const result = confirm("Confirm delete post?");
+                if (result) {
+                    Inertia.delete(route("posts.destroy", postId));
+                }
+            },
         },
 
         setup(props)
@@ -135,17 +146,16 @@
             });
 
             // To delete Post
-            const deletePost = (postId) => {
-                const result = confirm("Confirm delete post?");
-                if (result) {
-                    Inertia.delete(route("posts.destroy", postId), {
-                        preserveScroll: true,
-                    });
-                }
-            };
+            // const deletePost = (postId) => {
+            //     const result = confirm("Confirm delete post?");
+            //     if (result) {
+            //         Inertia.delete(route("posts.destroy", postId), {
+            //             preserveScroll: true,
+            //         });
+            //     }
+            // };
 
-            return { form, deletePost };
+            return { form };
         },
     };
-
 </script>
