@@ -12,12 +12,14 @@
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <JetInput
+                <input v-model.lazy="form.search" v-debounce="delay" placeholder="Search for something" />
+                <!-- <JetInput
                     type="text"
                     class="block ml-2 mb-4 w-60"
-                    v-model="form.search"
+                    v-model.lazy="form.search"
+                    v-debounce="delay"
                     placeholder="Search post..."
-                />
+                /> -->
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-3">
                     <div class="flex flex-col">
                         <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -103,6 +105,7 @@
     import JetButton from '@/Jetstream/Button.vue';
     import JetInput from '@/Jetstream/Input.vue';
     import JetPagination from '@/Components/Pagination.vue'
+    import { debounce } from "v-debounce";
     export default{
         components:
         {
@@ -118,8 +121,44 @@
             filters: Object,
         },
 
+        data()
+        {
+            return{
+                form:{
+                    search: this.filters.search,
+                    page: this.filters.page,
+                },
+                delay: 1000,
+            }
+        },
+
+        watch:
+        {
+            "form.search": function searchPost(newVal) {
+                // const query = pickBy(this.form);
+
+                Inertia.get(
+                    route("posts.index", newVal ? {'search': newVal} : {})
+                );
+            },
+        },
+
+
+        directives: {
+            debounce
+        },
+
         methods:
         {
+            // To search post
+            searchPost(newVal) {
+                // const query = pickBy(this.form);
+
+                Inertia.get(
+                    route("posts.index", newVal ? {'search': newVal} : {})
+                );
+            },
+
             // To delete Post
             deletePost(postId)
             {
@@ -130,32 +169,32 @@
             },
         },
 
-        setup(props)
-        {
-            // Make a reactive form. Table change when something is search.
-            const form = reactive({
-                search: props.filters.search,
-                page: props.filters.page,
-            });
+        // setup(props)
+        // {
+        //     // Make a reactive form. Table change when something is search.
+        //     const form = reactive({
+        //         search: props.filters.search,
+        //         page: props.filters.page,
+        //     });
 
-            watchEffect(() => {
-                const query = pickBy(form);
-                Inertia.replace(
-                    route("posts.index", Object.keys(query).length ? query : {})
-                );
-            });
+        //     watchEffect(() => {
+        //         const query = pickBy(form);
+        //         Inertia.replace(
+        //             route("posts.index", Object.keys(query).length ? query : {})
+        //         );
+        //     });
 
-            // To delete Post
-            // const deletePost = (postId) => {
-            //     const result = confirm("Confirm delete post?");
-            //     if (result) {
-            //         Inertia.delete(route("posts.destroy", postId), {
-            //             preserveScroll: true,
-            //         });
-            //     }
-            // };
+        //     // To delete Post
+        //     // const deletePost = (postId) => {
+        //     //     const result = confirm("Confirm delete post?");
+        //     //     if (result) {
+        //     //         Inertia.delete(route("posts.destroy", postId), {
+        //     //             preserveScroll: true,
+        //     //         });
+        //     //     }
+        //     // };
 
-            return { form };
-        },
+        //     return { form };
+        // },
     };
 </script>

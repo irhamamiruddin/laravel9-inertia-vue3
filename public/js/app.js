@@ -23435,21 +23435,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
-/* harmony import */ var _Layouts_GuestLayout_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Layouts/GuestLayout.vue */ "./resources/js/Layouts/GuestLayout.vue");
-/* harmony import */ var _Components_Pagination_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Components/Pagination.vue */ "./resources/js/Components/Pagination.vue");
-
-
-
+/* harmony import */ var _Layouts_GuestLayout_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Layouts/GuestLayout.vue */ "./resources/js/Layouts/GuestLayout.vue");
+/* harmony import */ var _Components_Pagination_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Components/Pagination.vue */ "./resources/js/Components/Pagination.vue");
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    GuestLayout: _Layouts_GuestLayout_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
-    JetPagination: _Components_Pagination_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
+    GuestLayout: _Layouts_GuestLayout_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    JetPagination: _Components_Pagination_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   props: {
     posts: Object
@@ -23469,7 +23462,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
+/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
 /* harmony import */ var _Layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Layouts/AppLayout.vue */ "./resources/js/Layouts/AppLayout.vue");
 /* harmony import */ var _Jetstream_Button_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Jetstream/Button.vue */ "./resources/js/Jetstream/Button.vue");
 /* harmony import */ var _Jetstream_FormSection_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Jetstream/FormSection.vue */ "./resources/js/Jetstream/FormSection.vue");
@@ -23477,6 +23470,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Jetstream_InputError_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Jetstream/InputError.vue */ "./resources/js/Jetstream/InputError.vue");
 /* harmony import */ var _Jetstream_Label_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/Jetstream/Label.vue */ "./resources/js/Jetstream/Label.vue");
 /* harmony import */ var _Jetstream_ActionMessage_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/Jetstream/ActionMessage.vue */ "./resources/js/Jetstream/ActionMessage.vue");
+// import { useForm } from '@inertiajs/inertia-vue3';
 
 
 
@@ -23495,23 +23489,31 @@ __webpack_require__.r(__webpack_exports__);
     JetInputError: _Jetstream_InputError_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
     JetLabel: _Jetstream_Label_vue__WEBPACK_IMPORTED_MODULE_6__["default"]
   },
-  props: ['post'],
-  setup: function setup(props) {
-    var form = (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_0__.useForm)({
-      _method: 'POST',
-      title: "",
-      content: ""
-    });
-
-    var createPost = function createPost() {
-      form.post(route('posts.store'));
-    };
-
+  // props:[],
+  data: function data() {
     return {
-      form: form,
-      createPost: createPost
+      form: {
+        title: "",
+        content: ""
+      }
     };
-  }
+  },
+  methods: {
+    createPost: function createPost(data) {
+      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_0__.Inertia.post(route('posts.store', data));
+    }
+  } // setup(props){
+  //     const form = useForm({
+  //         _method: 'POST',
+  //         title: "",
+  //         content: "",
+  //     });
+  //     const createPost = () => {
+  //         form.post(route('posts.store'));
+  //     };
+  //     return { form, createPost };
+  // }
+
 });
 
 /***/ }),
@@ -23527,7 +23529,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
+/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
 /* harmony import */ var _Layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Layouts/AppLayout.vue */ "./resources/js/Layouts/AppLayout.vue");
 /* harmony import */ var _Jetstream_Button_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Jetstream/Button.vue */ "./resources/js/Jetstream/Button.vue");
 /* harmony import */ var _Jetstream_FormSection_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Jetstream/FormSection.vue */ "./resources/js/Jetstream/FormSection.vue");
@@ -23535,6 +23537,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Jetstream_InputError_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Jetstream/InputError.vue */ "./resources/js/Jetstream/InputError.vue");
 /* harmony import */ var _Jetstream_Label_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/Jetstream/Label.vue */ "./resources/js/Jetstream/Label.vue");
 /* harmony import */ var _Jetstream_ActionMessage_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/Jetstream/ActionMessage.vue */ "./resources/js/Jetstream/ActionMessage.vue");
+// import { useForm } from '@inertiajs/inertia-vue3';
 
 
 
@@ -23556,24 +23559,33 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     post: Object
   },
-  setup: function setup(props) {
-    var form = (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_0__.useForm)({
-      _method: 'PUT',
-      title: props.post.title,
-      content: props.post.content
-    });
-
-    var updatePostInformation = function updatePostInformation() {
-      form.post(route('posts.update', props.post.id), {
-        preserveScroll: true
-      });
-    };
-
+  data: function data(props) {
     return {
-      form: form,
-      updatePostInformation: updatePostInformation
+      form: {
+        title: props.post.title,
+        content: props.post.content
+      }
     };
-  }
+  },
+  methods: {
+    updatePostInformation: function updatePostInformation(data) {
+      data._method = 'PUT';
+      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_0__.Inertia.post('/posts/' + data.id, data); // Inertia.post(route('posts.update',data));
+    }
+  } // setup(props){
+  //     const form = useForm({
+  //         _method: 'PUT',
+  //         title: props.post.title,
+  //         content: props.post.content,
+  //     });
+  //     const updatePostInformation = () => {
+  //         form.post(route('posts.update',props.post.id), {
+  //             preserveScroll: true,
+  //         });
+  //     };
+  //     return { form, updatePostInformation };
+  // }
+
 });
 
 /***/ }),
@@ -23589,16 +23601,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
-/* harmony import */ var _Layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Layouts/AppLayout.vue */ "./resources/js/Layouts/AppLayout.vue");
-/* harmony import */ var _Jetstream_Button_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Jetstream/Button.vue */ "./resources/js/Jetstream/Button.vue");
-/* harmony import */ var _Jetstream_Input_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Jetstream/Input.vue */ "./resources/js/Jetstream/Input.vue");
-/* harmony import */ var _Components_Pagination_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/Components/Pagination.vue */ "./resources/js/Components/Pagination.vue");
-
-
+/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
+/* harmony import */ var _Layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Layouts/AppLayout.vue */ "./resources/js/Layouts/AppLayout.vue");
+/* harmony import */ var _Jetstream_Button_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Jetstream/Button.vue */ "./resources/js/Jetstream/Button.vue");
+/* harmony import */ var _Jetstream_Input_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Jetstream/Input.vue */ "./resources/js/Jetstream/Input.vue");
+/* harmony import */ var _Components_Pagination_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Components/Pagination.vue */ "./resources/js/Components/Pagination.vue");
+// import { reactive, watchEffect } from "vue";
+// import { pickBy } from "lodash";
 
 
 
@@ -23606,39 +23615,56 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    AppLayout: _Layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
-    JetButton: _Jetstream_Button_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
-    JetInput: _Jetstream_Input_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
-    JetPagination: _Components_Pagination_vue__WEBPACK_IMPORTED_MODULE_6__["default"]
+    AppLayout: _Layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    JetButton: _Jetstream_Button_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    JetInput: _Jetstream_Input_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+    JetPagination: _Components_Pagination_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
   props: {
     posts: Object,
     filters: Object
   },
-  setup: function setup(props) {
-    // Make a reactive form. Table change when something is search.
-    var form = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
-      search: props.filters.search,
-      page: props.filters.page
-    });
-    (0,vue__WEBPACK_IMPORTED_MODULE_0__.watchEffect)(function () {
-      var query = (0,lodash__WEBPACK_IMPORTED_MODULE_1__.pickBy)(form);
-      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_2__.Inertia.replace(route("posts.index", Object.keys(query).length ? query : {}));
-    }); // To delete Post
-
-    var deletePost = function deletePost(postId) {
+  data: function data() {// return{
+    //     form:{
+    //         search: null,
+    //         page: null
+    //     }
+    // }
+  },
+  watch: {},
+  methods: {
+    // To delete Post
+    deletePost: function deletePost(postId) {
       var result = confirm("Confirm delete post?");
 
       if (result) {
-        _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_2__.Inertia["delete"](route("posts.destroy", postId), {
-          preserveScroll: true
-        });
+        _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_0__.Inertia["delete"](route("posts.destroy", postId));
       }
-    };
-
+    }
+  },
+  setup: function setup(props) {
+    // Make a reactive form. Table change when something is search.
+    // const form = reactive({
+    //     search: props.filters.search,
+    //     page: props.filters.page,
+    // });
+    // watchEffect(() => {
+    //     const query = pickBy(form);
+    //     Inertia.replace(
+    //         route("posts.index", Object.keys(query).length ? query : {})
+    //     );
+    // });
+    // To delete Post
+    // const deletePost = (postId) => {
+    //     const result = confirm("Confirm delete post?");
+    //     if (result) {
+    //         Inertia.delete(route("posts.destroy", postId), {
+    //             preserveScroll: true,
+    //         });
+    //     }
+    // };
     return {
-      form: form,
-      deletePost: deletePost
+      form: form
     };
   }
 });
@@ -24486,6 +24512,16 @@ __webpack_require__.r(__webpack_exports__);
     users: Object,
     filters: Object
   },
+  methods: {
+    // To delete Post
+    deleteUser: function deleteUser(postId) {
+      var result = confirm("Confirm delete post?");
+
+      if (result) {
+        _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_2__.Inertia["delete"](route("posts.destroy", postId));
+      }
+    }
+  },
   setup: function setup(props) {
     // Make a reactive form. Table change when something is search.
     var form = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
@@ -24496,20 +24532,17 @@ __webpack_require__.r(__webpack_exports__);
       var query = (0,lodash__WEBPACK_IMPORTED_MODULE_1__.pickBy)(form);
       _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_2__.Inertia.replace(route("users.index", Object.keys(query).length ? query : {}));
     }); // To delete User
-
-    var deleteUser = function deleteUser(userId) {
-      var result = confirm("Confirm delete user?");
-
-      if (result) {
-        _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_2__.Inertia["delete"](route("users.destroy", userId), {
-          preserveScroll: true
-        });
-      }
-    };
+    // const deleteUser = (userId) => {
+    //     const result = confirm("Confirm delete user?");
+    //     if (result) {
+    //         Inertia.delete(route("users.destroy", userId), {
+    //             preserveScroll: true,
+    //         });
+    //     }
+    // };
 
     return {
-      form: form,
-      deleteUser: deleteUser
+      form: form
     };
   }
 });
@@ -28070,7 +28103,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_JetFormSection, {
-        onSubmitted: $setup.createPost
+        onSubmitted: _cache[2] || (_cache[2] = function ($event) {
+          return $options.createPost($data.form);
+        })
       }, {
         title: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [_hoisted_4];
@@ -28084,9 +28119,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             value: "Title"
           }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_JetInput, {
             id: "title",
-            modelValue: $setup.form.title,
+            modelValue: $data.form.title,
             "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
-              return $setup.form.title = $event;
+              return $data.form.title = $event;
             }),
             type: "text",
             "class": "mt-1 block w-full",
@@ -28094,7 +28129,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }, null, 8
           /* PROPS */
           , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_JetInputError, {
-            message: $setup.form.errors.title,
+            message: _ctx.$page.props.errors.title,
             "class": "mt-2"
           }, null, 8
           /* PROPS */
@@ -28105,13 +28140,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             "class": "mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm",
             id: "content",
             "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
-              return $setup.form.content = $event;
+              return $data.form.content = $event;
             }),
             row: "10"
           }, null, 512
           /* NEED_PATCH */
-          ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.form.content]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_JetInputError, {
-            message: $setup.form.errors.content,
+          ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.content]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_JetInputError, {
+            message: _ctx.$page.props.errors.content,
             "class": "mt-2"
           }, null, 8
           /* PROPS */
@@ -28119,7 +28154,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         }),
         actions: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_JetActionMessage, {
-            on: $setup.form.recentlySuccessful,
+            on: $data.form.recentlySuccessful,
             "class": "mr-3"
           }, {
             "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -28132,9 +28167,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           /* PROPS */
           , ["on"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_JetButton, {
             "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
-              'opacity-25': $setup.form.processing
+              'opacity-25': $data.form.processing
             }),
-            disabled: $setup.form.processing
+            disabled: $data.form.processing
           }, {
             "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
               return [_hoisted_9];
@@ -28149,9 +28184,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         _: 1
         /* STABLE */
 
-      }, 8
-      /* PROPS */
-      , ["onSubmitted"])])])];
+      })])])];
     }),
     _: 1
     /* STABLE */
@@ -28226,7 +28259,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_JetFormSection, {
-        onSubmitted: $setup.updatePostInformation
+        onSubmitted: _cache[2] || (_cache[2] = function ($event) {
+          return $options.updatePostInformation($props.post);
+        })
       }, {
         title: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [_hoisted_4];
@@ -28240,9 +28275,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             value: "Title"
           }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_JetInput, {
             id: "title",
-            modelValue: $setup.form.title,
+            modelValue: $props.post.title,
             "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
-              return $setup.form.title = $event;
+              return $props.post.title = $event;
             }),
             type: "text",
             "class": "mt-1 block w-full",
@@ -28250,7 +28285,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }, null, 8
           /* PROPS */
           , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_JetInputError, {
-            message: $setup.form.errors.title,
+            message: _ctx.$page.props.errors.title,
             "class": "mt-2"
           }, null, 8
           /* PROPS */
@@ -28261,13 +28296,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             "class": "mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm",
             id: "content",
             "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
-              return $setup.form.content = $event;
+              return $props.post.content = $event;
             }),
             row: "10"
           }, "\r\n                            ", 512
           /* NEED_PATCH */
-          ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.form.content]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_JetInputError, {
-            message: $setup.form.errors.content,
+          ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $props.post.content]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_JetInputError, {
+            message: _ctx.$page.props.errors.content,
             "class": "mt-2"
           }, null, 8
           /* PROPS */
@@ -28275,7 +28310,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         }),
         actions: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_JetActionMessage, {
-            on: $setup.form.recentlySuccessful,
+            on: $data.form.recentlySuccessful,
             "class": "mr-3"
           }, {
             "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -28288,9 +28323,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           /* PROPS */
           , ["on"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_JetButton, {
             "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
-              'opacity-25': $setup.form.processing
+              'opacity-25': $data.form.processing
             }),
-            disabled: $setup.form.processing
+            disabled: $data.form.processing
           }, {
             "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
               return [_hoisted_9];
@@ -28305,9 +28340,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         _: 1
         /* STABLE */
 
-      }, 8
-      /* PROPS */
-      , ["onSubmitted"])])])];
+      })])])];
     }),
     _: 1
     /* STABLE */
@@ -28511,7 +28544,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         , ["href"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), post.can["delete"] ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
           key: 2,
           onClick: function onClick($event) {
-            return $setup.deletePost(post.id);
+            return $options.deletePost(post.id);
           },
           "class": "inline-block px-2.5 py-2 m-1 bg-red-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-red-900 hover:shadow-lg focus:bg-red-900 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out"
         }, " Delete ", 8
@@ -30134,7 +30167,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         /* PROPS, DYNAMIC_SLOTS */
         , ["href"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
           onClick: function onClick($event) {
-            return $setup.deleteUser(user.id);
+            return $options.deleteUser(user.id);
           },
           "class": "inline-block px-2.5 py-2 m-1 bg-red-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-red-900 hover:shadow-lg focus:bg-red-900 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out"
         }, " Delete ", 8
